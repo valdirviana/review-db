@@ -6,4 +6,9 @@
     <FileVersion>0.0.0.1</FileVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ReviewDB.Domain\ReviewDB.Domain.csproj" />
+    <ProjectReference Include="..\ReviewDB.Infra\ReviewDB.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
