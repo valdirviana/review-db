@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReviewDB.Domain.Entities;
+using ReviewDB.Domain.Interfaces.Repository.Interfaces;
+using ReviewDB.Domain.Interfaces.UoW;
 using ReviewDB.Infra.Data.Repository;
-using ReviewDB.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 

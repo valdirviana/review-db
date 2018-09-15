@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ReviewDB.Infra.Data.Repository.Interfaces
+namespace ReviewDB.Domain.Interfaces.Repository.Interfaces
 {
     public interface IPaginate<T>
     {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 using ReviewDB.Domain.Entities;
-using ReviewDB.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ReviewDB.Infra.Data.Repository.Interfaces
+namespace ReviewDB.Domain.Interfaces.Repository.Interfaces
 {
     public interface IRepositoryAsync<T> where T : BaseEntity
     {

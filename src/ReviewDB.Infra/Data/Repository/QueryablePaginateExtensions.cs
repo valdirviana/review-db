@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ReviewDB.Infra.Data.Repository.Interfaces;
+using ReviewDB.Domain.Interfaces.Repository.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;

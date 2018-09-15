@@ -1,4 +1,4 @@
-﻿using ReviewDB.Infra.Data.Repository.Interfaces;
+﻿using ReviewDB.Domain.Interfaces.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
