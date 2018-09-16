@@ -1,6 +1,6 @@
 ﻿using ReviewDB.Domain.Entities;
 
-namespace ReviewDB.Infra.Data.Repository.Interfaces
+namespace ReviewDB.Domain.Interfaces.Repository.Interfaces
 {
     public interface IRepositoryFactory
     {

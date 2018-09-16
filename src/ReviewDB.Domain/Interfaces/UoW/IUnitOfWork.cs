@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReviewDB.Domain.Entities;
-using ReviewDB.Infra.Data.Repository.Interfaces;
+using ReviewDB.Domain.Interfaces.Repository.Interfaces;
 using System;
 
-namespace ReviewDB.Infra.Data.UoW
+namespace ReviewDB.Domain.Interfaces.UoW
 {
     public interface IUnitOfWork : IDisposable
     {
