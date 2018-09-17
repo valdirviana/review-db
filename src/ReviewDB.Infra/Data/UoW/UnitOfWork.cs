@@ -28,9 +28,9 @@ namespace ReviewDB.Infra.Data.UoW
             return (IRepositoryAsync<TEntity>)_repositories[type];
         }
 
-        public int SaveChanges()
+        public bool Commit()
         {
-            return Context.SaveChanges();
+            return Context.SaveChanges() > 0;
         }
 
         public void Dispose()

@@ -1,6 +1,6 @@
-﻿using ReviewDB.Domain.Core.Events;
+﻿using FluentValidation.Results;
+using ReviewDB.Domain.Core.Events;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ReviewDB.Domain.Core.Commands
 {

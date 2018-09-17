@@ -1,25 +1,12 @@
-﻿using ReviewDB.Domain.Core.Model;
-using System;
+﻿using ReviewDB.Domain.Core.Commands;
+using ReviewDB.Domain.Core.Events;
+using System.Threading.Tasks;
 
 namespace ReviewDB.Domain.Core.Bus
 {
-    public class Customer : Entity
+    public interface IMediatorHandler
     {
-        public Customer(Guid id, string name, string email, DateTime birthDate)
-        {
-            Id = id;
-            Name = name;
-            Email = email;
-            BirthDate = birthDate;
-        }
-
-        // Empty constructor for EF
-        protected Customer() { }
-
-        public string Name { get; private set; }
-
-        public string Email { get; private set; }
-
-        public DateTime BirthDate { get; private set; }
+        Task SendCommand<T>(T command) where T : Command;
+        Task RaiseEvent<T>(T @event) where T : Event;
     }
 }

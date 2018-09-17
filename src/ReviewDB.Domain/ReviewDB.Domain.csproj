@@ -11,10 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\" />
-    <Folder Include="Commands\" />
     <Folder Include="EventHandlers\" />
     <Folder Include="Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReviewDB.Domain.Core\ReviewDB.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
