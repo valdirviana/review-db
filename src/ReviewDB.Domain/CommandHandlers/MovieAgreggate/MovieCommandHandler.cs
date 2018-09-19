@@ -12,7 +12,8 @@ namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
 {
     public class MovieCommandHandler : CommandHandler,
         IRequestHandler<RegisterMovieCommand>,
-        IRequest<UpdateMovieCommand>
+        IRequestHandler<UpdateMovieCommand>,
+        IRequestHandler<RemoveMovieCommand>
     {
         private readonly IRepositoryAsync<Movie> _movieRepository;
         private readonly IMediatorHandler _bus;
@@ -23,18 +24,22 @@ namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
             _bus = bus;
         }
 
-        Task<Unit> IRequestHandler<RegisterMovieCommand, Unit>.Handle(RegisterMovieCommand request, CancellationToken cancellationToken)
+        public Task<Unit> Handle(RegisterMovieCommand request, CancellationToken cancellationToken)
+        {
+
+            return Unit.Task;
+        }
+
+        public Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)
         {
 
 
             return Unit.Task;
         }
 
-        public Task Handle(UpdateMovieCommand request, CancellationToken cancellationToken)
+        public Task<Unit> Handle(RemoveMovieCommand request, CancellationToken cancellationToken)
         {
-
-
-            return Task.CompletedTask;
+            throw new System.NotImplementedException();
         }
     }
 }
