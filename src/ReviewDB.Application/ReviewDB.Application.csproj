@@ -11,4 +11,11 @@
     <ProjectReference Include="..\ReviewDB.Infra\ReviewDB.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
 </Project>

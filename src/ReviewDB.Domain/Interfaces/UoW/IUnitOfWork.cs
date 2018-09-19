@@ -10,7 +10,7 @@ namespace ReviewDB.Domain.Interfaces.UoW
         //IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
         IRepositoryAsync<TEntity> GetRepositoryAsync<TEntity>() where TEntity : BaseEntity;
 
-        int SaveChanges();
+        bool Commit();
     }
 
     public interface IUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext

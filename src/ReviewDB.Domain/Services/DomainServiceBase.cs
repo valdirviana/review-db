@@ -23,9 +23,9 @@ namespace ReviewDB.Domain.Services
             return _unitOfWork.GetRepositoryAsync<TEntity>();
         }
 
-        public int SaveChanges()
+        public bool SaveChanges()
         {
-            return _unitOfWork.SaveChanges();
+            return _unitOfWork.Commit();
         }
 
         public void Dispose()
