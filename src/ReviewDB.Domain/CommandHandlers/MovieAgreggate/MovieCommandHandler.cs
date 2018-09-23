@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
 {
-    public class MovieCommandHandler : CommandHandler,
+    public class MovieCommandHandler : 
+        CommandHandler,
         IRequestHandler<RegisterMovieCommand>,
         IRequestHandler<UpdateMovieCommand>,
         IRequestHandler<RemoveMovieCommand>
@@ -39,7 +40,8 @@ namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
 
         public Task<Unit> Handle(RemoveMovieCommand request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+
+            return Unit.Task;
         }
     }
 }

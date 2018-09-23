@@ -7,15 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReviewDB.Domain\ReviewDB.Domain.csproj" />
-    <ProjectReference Include="..\ReviewDB.Infra\ReviewDB.Infra.csproj" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="AutoMapper\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\ReviewDB.Domain\ReviewDB.Domain.csproj" />
+    <ProjectReference Include="..\ReviewDB.Infra\ReviewDB.Infra.csproj" />
   </ItemGroup>
 
 </Project>
