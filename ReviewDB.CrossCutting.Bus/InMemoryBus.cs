@@ -2,7 +2,6 @@
 using ReviewDB.Domain.Core.Bus;
 using ReviewDB.Domain.Core.Commands;
 using ReviewDB.Domain.Core.Events;
-using System;
 using System.Threading.Tasks;
 
 namespace ReviewDB.CrossCutting.Bus

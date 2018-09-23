@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ReviewDB.Domain.Entities.MovieAggregate;
+using ReviewDB.Domain.Interfaces.Repository.Interfaces;
+using System.Threading.Tasks;
 
 namespace ReviewDB.Application.Interfaces.MovieAgreggate
 {
-    public class IMovieAppService
+    public interface IMovieAppService
     {
+        Task<IPaginate<Movie>> GetListAsync();
     }
 }

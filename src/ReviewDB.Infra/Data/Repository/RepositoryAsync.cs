@@ -32,7 +32,7 @@ namespace ReviewDB.Infra.Data.Repository
 
         public void UpdateAsync(T entity) => _dbSet.Update(entity);
 
-        public Task<IPaginate<T>> GetListAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int index = 0, int size = 20, bool disableTracking = true, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IPaginate<T>> GetListAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, int index = 0, int size = 20, bool disableTracking = true, CancellationToken cancellationToken = default(CancellationToken))
         {
             IQueryable<T> query = _dbSet;
             if (disableTracking)
@@ -45,9 +45,9 @@ namespace ReviewDB.Infra.Data.Repository
                 query = query.Where(predicate);
 
             if (orderBy != null)
-                return orderBy(query).ToPaginateAsync(index, size, 0, cancellationToken);
+                return await orderBy(query).ToPaginateAsync(index, size, 0, cancellationToken);
             else
-                return query.ToPaginateAsync(index, size, 0, cancellationToken);
+                return await query.ToPaginateAsync(index, size, 0, cancellationToken);
         }
 
         public async Task<T> SingleAsync(Expression<Func<T, bool>> predicate = null, 
