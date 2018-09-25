@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ReviewDB.Infra.CrossCutting.IoC\ReviewDB.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\ReviewDB.Infra.CrossCutting.IoC\ReviewDB.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\ReviewDB.Application\ReviewDB.Application.csproj" />
     <ProjectReference Include="..\ReviewDB.Domain\ReviewDB.Domain.csproj" />
     <ProjectReference Include="..\ReviewDB.Infra\ReviewDB.Infra.csproj" />

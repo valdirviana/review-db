@@ -37,9 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrossCutting", "5.2 -
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 - Data", "5.1 - Data", "{9D23F4A8-E52B-44A8-8BAA-A6E1010E908C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewDB.CrossCutting.Bus", "ReviewDB.CrossCutting.Bus\ReviewDB.CrossCutting.Bus.csproj", "{5C9065B8-C6D4-447C-9C17-496BA099BB1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewDB.CrossCutting.Bus", "src\ReviewDB.CrossCutting.Bus\ReviewDB.CrossCutting.Bus.csproj", "{5C9065B8-C6D4-447C-9C17-496BA099BB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewDB.Infra.CrossCutting.IoC", "ReviewDB.Infra.CrossCutting.IoC\ReviewDB.Infra.CrossCutting.IoC.csproj", "{E6D9F5F9-2239-43AA-A9F3-551ECC1E8C1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewDB.Infra.CrossCutting.IoC", "src\ReviewDB.Infra.CrossCutting.IoC\ReviewDB.Infra.CrossCutting.IoC.csproj", "{E6D9F5F9-2239-43AA-A9F3-551ECC1E8C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
