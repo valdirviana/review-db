@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ReviewDB.DataImporter
 {
@@ -19,6 +20,7 @@ namespace ReviewDB.DataImporter
             {
                 string json = r.ReadToEnd();
                 List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
+                var bestMovies = items.Where(x => x.popularity >= 1).ToList();
             }
         }
     }
