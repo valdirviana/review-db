@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace ReviewDB.DataImporter
 {
@@ -46,13 +47,22 @@ namespace ReviewDB.DataImporter
             LoadJsonAsync(movieAppService);
         }
 
-        public static async System.Threading.Tasks.Task LoadJsonAsync(IMovieAppService movieAppService)
+        public static async Task LoadJsonAsync(IMovieAppService movieAppService)
         {
             using (StreamReader r = new StreamReader("movie_ids_09_26_2018.json"))
             {
                 string json = r.ReadToEnd();
                 List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
                 var bestMovies = items.Where(x => x.popularity >= 1);
+
+                var counter = 1;
+                var multiplier = 100;
+
+                Parallel.ForEach(bestMovies, (bestMovie) =>
+                {
+
+
+                });
 
                 foreach (var bestMovie in bestMovies)
                 {
@@ -63,15 +73,25 @@ namespace ReviewDB.DataImporter
                         OriginalTitle = bestMovie.original_title,
                         Adult = bestMovie.adult
                     };
-                try
-                {
-                    await movieAppService.Register(movieViewModel);
-                }
-                catch (Exception ex)
-                {
-                    var exception = ex;
-                    throw;
-                }
+
+                    if(counter > multiplier)
+                    {
+                        GC.Collect();
+                        multiplier += 100;
+                        Console.WriteLine("***************************************************************************");
+                        Console.WriteLine("***************************************************************************");
+                        Console.WriteLine("***************************************************************************");
+                    }
+                    
+                    counter++;
+                    try
+                    {
+                        await Task.Run(() => movieAppService.Register(movieViewModel));    
+                    }
+                    catch (Exception ex)
+                    {
+                        var exception = ex;
+                    }
                     
                 }
             }
