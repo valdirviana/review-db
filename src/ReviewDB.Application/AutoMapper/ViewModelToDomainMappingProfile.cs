@@ -9,9 +9,12 @@ namespace ReviewDB.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<MovieViewModel, RegisterMovieCommand>()
-                .ConstructUsing(c => new RegisterMovieCommand(c.Title));
+                .ForMember(x => x.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(x => x.OriginalTitle, opt => opt.MapFrom(src => src.OriginalTitle))
+                .ForMember(x => x.TmdbId, opt => opt.MapFrom(src => src.TmdbId));
+
             CreateMap<MovieViewModel, UpdateMovieCommand>()
-                .ConstructUsing(c => new UpdateMovieCommand(c.Id, c.Title));
+                .ConstructUsing(c => new UpdateMovieCommand(c.Id, c.OriginalTitle));
         }
     }
 }

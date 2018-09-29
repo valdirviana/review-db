@@ -7,6 +7,8 @@ using ReviewDB.CrossCutting.Bus;
 using ReviewDB.Domain.CommandHandlers.MovieAgreggate;
 using ReviewDB.Domain.Commands.MovieAgreggate;
 using ReviewDB.Domain.Core.Bus;
+using ReviewDB.Domain.Core.Events;
+using ReviewDB.Domain.Core.Notifications;
 using ReviewDB.Domain.Interfaces.UoW;
 using ReviewDB.Infra.Data;
 using ReviewDB.Infra.Data.UoW;
@@ -30,7 +32,7 @@ namespace ReviewDB.Infra.CrossCutting.IoC
             services.AddScoped<IMovieAppService, MovieAppService>();
 
             // Domain - Events
-            //services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
             //services.AddScoped<INotificationHandler<CustomerRegisteredEvent>, CustomerEventHandler>();
             //services.AddScoped<INotificationHandler<CustomerUpdatedEvent>, CustomerEventHandler>();
             //services.AddScoped<INotificationHandler<CustomerRemovedEvent>, CustomerEventHandler>();
@@ -43,7 +45,7 @@ namespace ReviewDB.Infra.CrossCutting.IoC
             // Infra - Data
             //services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork<ReviewDBContext>>();
-            //services.AddScoped<EquinoxContext>();
+            services.AddScoped<ReviewDBContext>();
 
             // Infra - Data EventSourcing
             //services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();

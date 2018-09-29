@@ -22,13 +22,13 @@ namespace ReviewDB.Infra.Data.Repository
             _dbSet = _dbContext.Set<T>();
         }
 
-        public Task AddAsync(T entity) => AddAsync(entity, new CancellationToken());
+        public async Task AddAsync(T entity) => await AddAsync(entity, new CancellationToken());
 
-        public Task AddAsync(T entity, CancellationToken cancellationToken = default(CancellationToken)) => _dbSet.AddAsync(entity, cancellationToken);
+        public async Task AddAsync(T entity, CancellationToken cancellationToken = default(CancellationToken)) => await _dbSet.AddAsync(entity, cancellationToken);
 
-        public Task AddAsync(params T[] entities) => _dbSet.AddRangeAsync(entities);
+        public async Task AddAsync(params T[] entities) => await _dbSet.AddRangeAsync(entities);
 
-        public Task AddAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default(CancellationToken)) => _dbSet.AddRangeAsync(entities, cancellationToken);
+        public async Task AddAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default(CancellationToken)) => await _dbSet.AddRangeAsync(entities, cancellationToken);
 
         public void UpdateAsync(T entity) => _dbSet.Update(entity);
 

@@ -1,13 +1,32 @@
 ﻿using ReviewDB.Domain.Validation.MovieAgreggate;
+using System;
 
 namespace ReviewDB.Domain.Commands.MovieAgreggate
 {
     public class RegisterMovieCommand : MovieCommand
     {
-        public RegisterMovieCommand(string title)
+        protected RegisterMovieCommand(Guid id,
+            int tmdbId,
+            string originalTitle,
+            string overview,
+            string imdbId,
+            double popularity,
+            DateTime releaseDate,
+            string homepage,
+            bool adult)
         {
-            Title = title;
+            Id = id;
+            TmdbId = tmdbId;
+            OriginalTitle = originalTitle;
+            Overview = overview;
+            ImdbId = imdbId;
+            Popularity = popularity;
+            ReleaseDate = releaseDate;
+            Homepage = homepage;
+            Adult = adult;
         }
+
+        public RegisterMovieCommand() { }
 
         public override bool IsValid()
         {
