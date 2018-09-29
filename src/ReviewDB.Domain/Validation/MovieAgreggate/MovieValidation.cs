@@ -8,7 +8,7 @@ namespace ReviewDB.Domain.Validation.MovieAgreggate
     {
         protected void ValidationTitle()
         {
-            RuleFor(x => x.Title)
+            RuleFor(x => x.OriginalTitle)
                 .NotEmpty().WithMessage("Please ensure Tittle")
                 .Length(2, 200).WithMessage("The Title must have between 2 and 200 characters");
         }

@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
 {
-    public class MovieCommandHandler : 
-        CommandHandler,
+    public class MovieCommandHandler : CommandHandler,
         IRequestHandler<RegisterMovieCommand>,
         IRequestHandler<UpdateMovieCommand>,
         IRequestHandler<RemoveMovieCommand>
@@ -25,10 +24,15 @@ namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
             _bus = bus;
         }
 
-        public Task<Unit> Handle(RegisterMovieCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(RegisterMovieCommand request, CancellationToken cancellationToken)
         {
+            var movie = new Movie(request.TmdbId.Value, request.OriginalTitle, request.Adult.Value);
 
-            return Unit.Task;
+            await _movieRepository.AddAsync(movie);
+
+            Commit();
+
+            return await Unit.Task;
         }
 
         public Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)

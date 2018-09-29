@@ -9,10 +9,14 @@ namespace ReviewDB.Application.ViewModel
         [Key]
         public Guid Id { get; set; }
 
+        public int TmdbId { get; set; }
+
         [Required(ErrorMessage = "The Title is Required")]
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("Title")]
-        public string Title { get; set; }
+        public string OriginalTitle { get; set; }
+
+        public bool Adult { get; set; }
     }
 }

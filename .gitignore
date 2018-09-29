@@ -33,3 +33,4 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 /src/ReviewDB.Api/appsecrets.json
+/src/ReviewDB.DataImporter/movie_ids_09_26_2018.json

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReviewDB.Infra.Data;
 
 namespace ReviewDB.Infra.Migrations
 {
     [DbContext(typeof(ReviewDBContext))]
-    partial class ReviewDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180928224232_MovieNewFields")]
+    partial class MovieNewFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,6 @@ namespace ReviewDB.Infra.Migrations
                         .HasMaxLength(12);
 
                     b.Property<string>("OriginalTitle")
-                        .IsRequired()
                         .HasMaxLength(250);
 
                     b.Property<string>("Overview")

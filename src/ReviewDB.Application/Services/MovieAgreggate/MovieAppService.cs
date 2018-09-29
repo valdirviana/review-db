@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ReviewDB.Application.Interfaces.MovieAgreggate;
+using ReviewDB.Application.ViewModel;
+using ReviewDB.Domain.Commands.MovieAgreggate;
 using ReviewDB.Domain.Core.Bus;
 using ReviewDB.Domain.Entities.MovieAggregate;
 using ReviewDB.Domain.Interfaces.Repository.Interfaces;
@@ -23,6 +25,7 @@ namespace ReviewDB.Application.Services.MovieAgreggate
                                 )
         {
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
             Bus = bus;
             _repositoryAsync = _unitOfWork.GetRepositoryAsync<Movie>();
             //_eventStoreRepository = eventStoreRepository;
@@ -32,6 +35,12 @@ namespace ReviewDB.Application.Services.MovieAgreggate
         {
             var result = await _repositoryAsync.GetListAsync();
             return result;
+        }
+
+        public async Task Register(MovieViewModel movieViewModel)
+        {
+            var registerCommand = _mapper.Map<RegisterMovieCommand>(movieViewModel);
+            await Bus.SendCommand(registerCommand);
         }
     }
 }

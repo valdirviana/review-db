@@ -5,10 +5,10 @@ namespace ReviewDB.Domain.Commands.MovieAgreggate
 {
     public class UpdateMovieCommand : MovieCommand
     {
-        public UpdateMovieCommand(Guid id, string title)
+        public UpdateMovieCommand(Guid id, string originalTitle)
         {
             Id = id;
-            Title = title;
+            OriginalTitle = originalTitle;
         }
 
         public override bool IsValid()
