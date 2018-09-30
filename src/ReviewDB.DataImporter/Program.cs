@@ -55,7 +55,7 @@ namespace ReviewDB.DataImporter
             {
                 string json = r.ReadToEnd();
                 List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
-                var bestMovies1 = items.Where(x => x.popularity >= 20).ToList();
+                var bestMovies1 = items.Where(x => x.popularity >= 30).ToList();
 
                 try
                 {
@@ -83,7 +83,7 @@ namespace ReviewDB.DataImporter
                     //}
                     //stopwatch3.Stop();
 
-
+                    Console.WriteLine("Movies count: {0}", bestMovies1.Count());
 
 
 
@@ -98,10 +98,12 @@ namespace ReviewDB.DataImporter
                                 {
                                     TmdbId = bestMovie.id,
                                     OriginalTitle = bestMovie.original_title,
-                                    Adult = bestMovie.adult
+                                    Adult = bestMovie.adult,
+                                    Popularity = bestMovie.popularity
                                 };
 
                                _provider.GetService<IMovieAppService>().Register(movieViewModel);
+                                GC.Collect();
                             }
 
                         }

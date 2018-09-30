@@ -18,5 +18,7 @@ namespace ReviewDB.Application.ViewModel
         public string OriginalTitle { get; set; }
 
         public bool Adult { get; set; }
+
+        public double Popularity { get; set; }
     }
 }
