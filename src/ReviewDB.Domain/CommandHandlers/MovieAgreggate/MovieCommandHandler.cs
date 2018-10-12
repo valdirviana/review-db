@@ -26,13 +26,28 @@ namespace ReviewDB.Domain.CommandHandlers.MovieAgreggate
 
         public async Task<Unit> Handle(RegisterMovieCommand request, CancellationToken cancellationToken)
         {
-            var movie = new Movie(request.TmdbId.Value, request.OriginalTitle, request.Adult.Value);
+            try
+            {
+                var repoMovie = _movieRepository.SingleAsync(X => X.TmdbId == request.TmdbId, disableTracking: true).Result;
+                if (repoMovie != null)
+                {
+                    return await Unit.Task;
+                }
 
-            await _movieRepository.AddAsync(movie);
+                var movie = new Movie(request.TmdbId.Value, request.OriginalTitle, request.Adult.Value, request.Popularity);
 
-            Commit();
+                await _movieRepository.AddAsync(movie);
 
-            return await Unit.Task;
+                Commit();
+
+                return await Unit.Task;
+
+            }
+            catch (System.Exception e)
+            {
+                var ex = e;
+                throw;
+            }
         }
 
         public Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)

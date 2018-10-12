@@ -4,11 +4,12 @@ namespace ReviewDB.Domain.Entities.MovieAggregate
 {
     public class Movie : BaseEntity
     {
-        public Movie(int tmdbId, string originalTitle, bool adult)
+        public Movie(int tmdbId, string originalTitle, bool adult, double popularity)
         {
             TmdbId = tmdbId;
             OriginalTitle = originalTitle;
             Adult = adult;
+            Popularity = popularity;
         }
 
         public int TmdbId { get; private set; }

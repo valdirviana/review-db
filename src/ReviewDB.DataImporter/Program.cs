@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using ReviewDB.Application.AutoMapper;
@@ -12,17 +11,21 @@ using ReviewDB.Infra.CrossCutting.IoC;
 using ReviewDB.Infra.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace ReviewDB.DataImporter
 {
     public class Program
     {
+        private static ServiceProvider _provider;
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");          
+            Console.WriteLine("Hello World!");
 
             IServiceCollection services = new ServiceCollection();
 
@@ -38,42 +41,131 @@ namespace ReviewDB.DataImporter
 
             NativeInjectorBootStrapper.RegisterServices(services);
 
-            var provider = services
+            _provider = services
                 .BuildServiceProvider();
 
-            var movieAppService = provider.GetService<IMovieAppService>();
+            var movieAppService = _provider.GetService<IMovieAppService>();
 
-            LoadJsonAsync(movieAppService);
+            LoadJsonAsync();
         }
 
-        public static async System.Threading.Tasks.Task LoadJsonAsync(IMovieAppService movieAppService)
+        public static async Task LoadJsonAsync()
         {
             using (StreamReader r = new StreamReader("movie_ids_09_26_2018.json"))
             {
                 string json = r.ReadToEnd();
                 List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
-                var bestMovies = items.Where(x => x.popularity >= 1);
+                var bestMovies1 = items.Where(x => x.popularity >= 30).ToList();
 
-                foreach (var bestMovie in bestMovies)
-                {
-                    Console.WriteLine($"Movie: {bestMovie.original_title} - Popularity: {bestMovie.popularity}");
-                    var movieViewModel = new MovieViewModel()
-                    {
-                        TmdbId = bestMovie.id,
-                        OriginalTitle = bestMovie.original_title,
-                        Adult = bestMovie.adult
-                    };
                 try
                 {
-                    await movieAppService.Register(movieViewModel);
+                    //Stopwatch stopwatch3 = new Stopwatch();
+                    //stopwatch3.Start();
+                    //try
+                    //{
+                    //    foreach (var bestMovie in bestMovies1)
+                    //    {
+                    //        Console.WriteLine($"Movie: {bestMovie.original_title} - Popularity: {bestMovie.popularity}");
+                    //        var movieViewModel = new MovieViewModel()
+                    //        {
+                    //            TmdbId = bestMovie.id,
+                    //            OriginalTitle = bestMovie.original_title,
+                    //            Adult = bestMovie.adult
+                    //        };
+
+                    //        await movieAppService3.Register(movieViewModel);
+                    //    }
+
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    var exception = ex;
+                    //}
+                    //stopwatch3.Stop();
+
+                    Console.WriteLine("Movies count: {0}", bestMovies1.Count());
+
+
+
+                    Task taskA = new Task(() =>
+                    {
+                        try
+                        {
+                            foreach (var bestMovie in bestMovies1)
+                            {
+                                //Console.WriteLine($"Movie: {bestMovie.original_title} - Popularity: {bestMovie.popularity}");
+                                var movieViewModel = new MovieViewModel()
+                                {
+                                    TmdbId = bestMovie.id,
+                                    OriginalTitle = bestMovie.original_title,
+                                    Adult = bestMovie.adult,
+                                    Popularity = bestMovie.popularity
+                                };
+
+                               _provider.GetService<IMovieAppService>().Register(movieViewModel);
+                                GC.Collect();
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            var exception = ex;
+                        }
+                    });
+
+                    taskA.Start();
+                    Stopwatch stopwatch2 = new Stopwatch();
+                    stopwatch2.Start();
+                    taskA.Wait();
+                    stopwatch2.Stop();
+
+
+
+                    //Task taskB = new Task(() =>
+                    //{
+                    //    try
+                    //    {
+                    //        Parallel.ForEach(bestMovies2, new ParallelOptions { MaxDegreeOfParallelism = 1 }, (bestMovie) =>
+                    //        {
+                    //            Console.WriteLine($"Movie: {bestMovie.original_title} - Popularity: {bestMovie.popularity}");
+                    //            var movieViewModel = new MovieViewModel()
+                    //            {
+                    //                TmdbId = bestMovie.id,
+                    //                OriginalTitle = bestMovie.original_title,
+                    //                Adult = bestMovie.adult
+                    //            };
+                    //            movieAppService2.Register(movieViewModel);
+                    //        });
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        var exception = ex;
+                    //    }
+                    //});
+
+                    //Stopwatch stopwatch1 = new Stopwatch();
+                    //taskB.Start();
+                    //stopwatch1.Start();
+                    //taskB.Wait();
+                    //stopwatch1.Stop();
+
+
+
+
+
+                    //Console.WriteLine("Time elapsed Parallel: {0}", stopwatch1.Elapsed);
+                    Console.WriteLine("Time elapsed: {0}", stopwatch2.Elapsed);
+                    //Console.WriteLine("Time elapsed: {0} ALONE FOR", stopwatch3.Elapsed);
+                    Console.WriteLine("Movies count: {0}", bestMovies1.Count());
+
+                    Console.ReadKey();
+
                 }
                 catch (Exception ex)
                 {
                     var exception = ex;
-                    throw;
                 }
-                    
-                }
+
             }
         }
     }
